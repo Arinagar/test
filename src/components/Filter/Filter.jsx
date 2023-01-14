@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
 import css from './Filter.module.css';
-export const Filter = ({ onFilterInput }) => {
+
+export const Filter = () => {
   return (
     <div className={css.contacts}>
       <h2>Contacts</h2>
@@ -8,13 +8,9 @@ export const Filter = ({ onFilterInput }) => {
       <input
         type="text"
         name="filter"
-        onChange={event => onFilterInput(event.target.value)}
+        onChange={event => console.log(event.target.value)}
         placeholder="Search contacts"
       />
     </div>
   );
-};
-
-Filter.propTypes = {
-  onFilterInput: PropTypes.func.isRequired,
 };
