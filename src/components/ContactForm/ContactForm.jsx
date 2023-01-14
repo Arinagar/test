@@ -21,7 +21,7 @@ export const ContactForm = () => {
   const onSubmitForm = event => {
     event.preventDefault();
     console.log(contacts);
-    if (contacts.find(el => el.name === contacts[name])) {
+    if (contacts.find(el => el.name === contacts.map(el => el.name))) {
       alert(`${contacts.name} has already exists`);
       return false;
     }
