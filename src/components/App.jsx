@@ -5,9 +5,10 @@ import { ContactsList } from './ContactList/ContactList';
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import css from './Container/Container.module.css';
+import { selectContacts } from 'components/redux/contacts/selectors';
 
 export const App = () => {
-  const contacts = useSelector(state => state.contacts.items);
+  const contacts = useSelector(selectContacts);
 
   return (
     <div className={css.container}>

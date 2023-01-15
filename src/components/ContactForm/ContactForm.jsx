@@ -3,39 +3,43 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
-import { addContact } from 'components/redux/contactsSlice';
+import { addContact } from 'components/redux/contacts/contactsSlice';
+import { selectContacts } from 'components/redux/contacts/selectors';
 
 export const ContactForm = () => {
-  const dispatch = useDispatch();
-
-  const contacts = useSelector(state => state.contacts.items);
-
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
+  const contacts = useSelector(selectContacts);
+  const dispatch = useDispatch();
+
   const onInputChange = event => {
-    if (event.target.name === 'name') setName(event.target.value);
-    if (event.target.name === 'number') setNumber(event.target.value);
+    const { name, value } = event.target;
+    if (name === 'name') setName(value);
+    if (name === 'number') setNumber(value);
   };
 
   const onSubmitForm = event => {
     event.preventDefault();
-    console.log(contacts);
-    if (contacts.find(el => el.name === contacts.map(el => el.name))) {
-      alert(`${contacts.name} has already exists`);
-      return false;
+
+    const isInContact = contacts.some(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
+    if (isInContact) {
+      alert(`${name} has already exists`);
+      return;
     }
-    setName(prev => [...prev]);
-    const isSuccess = {
-      name: name.trim().toLowerCase(),
-      number: number,
-      id: nanoid(10),
-    };
-    if (isSuccess) {
-      setName('');
-      setNumber('');
-    }
-    dispatch(addContact(isSuccess));
+
+    dispatch(
+      addContact({
+        name: name.trim(),
+        number: number,
+        id: nanoid(10),
+      })
+    );
+
+    setName('');
+    setNumber('');
   };
 
   return (

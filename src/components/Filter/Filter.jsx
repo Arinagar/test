@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 
 import css from './Filter.module.css';
 
-import { filterContact } from 'components/redux/filterSlice';
+import { filterContact } from 'components/redux/filter/filterSlice';
 
 export const Filter = () => {
   const dispatch = useDispatch();
@@ -14,8 +14,7 @@ export const Filter = () => {
         type="text"
         name="filter"
         onChange={event => {
-          const action = filterContact(event.target.value);
-          dispatch(action);
+          dispatch(filterContact(event.target.value));
         }}
         placeholder="Search contacts"
       />

@@ -1,12 +1,14 @@
 import { useSelector } from 'react-redux';
-
-import css from './ContactList.module.css';
-import { deleteContact } from 'components/redux/contactsSlice';
 import { useDispatch } from 'react-redux';
 
+import css from './ContactList.module.css';
+import { deleteContact } from 'components/redux/contacts/contactsSlice';
+import { selectContacts } from 'components/redux/contacts/selectors';
+import { filterContacts } from 'components/redux/filter/selectors';
+
 export const ContactsList = () => {
-  const contacts = useSelector(state => state.contacts.items);
-  const filter = useSelector(state => state.filter);
+  const contacts = useSelector(selectContacts);
+  const filter = useSelector(filterContacts);
   const dispatch = useDispatch();
   const filteredContacts = contacts.filter(contacts =>
     contacts.name.trim().toLowerCase().includes(filter.trim().toLowerCase())
@@ -20,8 +22,7 @@ export const ContactsList = () => {
             <button
               type="button"
               onClick={() => {
-                const action = deleteContact(el.id);
-                dispatch(action);
+                dispatch(deleteContact(el.id));
               }}
               className={css.list_button}
             >
