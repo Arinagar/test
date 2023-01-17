@@ -1,8 +1,8 @@
 {
-  "name": "goit-react-hw-06-phonebook",
+  "name": "test",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://goitacademy.github.io/goit-react-hw-06-phonebook/",
+  "homepage": "https://goitacademy.github.io/test/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
     "@testing-library/jest-dom": "^5.16.3",
